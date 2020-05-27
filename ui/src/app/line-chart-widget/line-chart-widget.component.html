@@ -1,0 +1,47 @@
+<div class="line-chart-widget">
+    <div class="card-container">
+        <div class="card">
+            <h3 class="card-title">
+                Covid-19 Annotations/Metrics Comparison by Location
+            </h3>
+            <div class="btn-group pt-2 pb-1 mx-3">
+                <div>
+                    <p-multiSelect [options]="availableLocations" [(ngModel)]="selectedLocations" [dropdownIcon]="'pi pi-caret-down'"
+                        (onPanelHide)="hidePanel()" [filter]="true" [defaultLabel]="'Select Countries'"
+                        [maxSelectedLabels]="2"></p-multiSelect>
+                </div>
+                <div dropdown class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="windowDropdown"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ selectedWindow | titlecase }}
+                    </button>
+                    <div class="dropdown-menu scrollable-menu" aria-labelledby="windowDropdown">
+                        <div *ngFor="let window of windowsAvailable">
+                            <button class="dropdown-item" type="button" 
+                            (click)="selectWindow(window)">{{ window | titlecase }}</button>
+                        </div>
+                    </div>
+                </div>
+                <div dropdown class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="metricDropdown"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ selectedMetric | titlecase }}
+                    </button>
+                    <div class="dropdown-menu scrollable-menu" aria-labelledby="metricDropdown">
+                        <div *ngFor="let metric of metrics; let i=index">
+                            <button class="dropdown-item" type="button"
+                                (click)="selectMetric(metric, i)">{{ metric | titlecase }}</button>
+                        </div>
+                    </div>
+                </div>
+                <p *ngIf="!noChartData" class="card-text text-muted pt-1 mx-2">{{ chartDescriptionText }}</p>
+            </div>
+            <div class="card-body">
+                <div>
+                    <div id="lineContainer" class="chart-container"></div>
+                    <!-- <app-line-chart></app-line-chart> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
