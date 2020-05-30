@@ -1,0 +1,49 @@
+<div class="bar-chart-widget">
+    <div class="card-container">
+        <div class="card">
+            <h3 class="card-title">
+                Covid-19 Cases by Country
+            </h3>
+            <div class="btn-group d-flex flex-row pt-2 pb-1 mx-3">
+                <div dropdown class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="locationDropdown"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ selectedLocation }}
+                    </button>
+                    <div class="dropdown-menu scrollable-menu" aria-labelledby="locationDropdown">
+                        <div *ngFor="let loc of locations">
+                            <button class="dropdown-item" type="button" (click)="selectLocation(loc)">{{ loc }}</button>
+                        </div>
+                    </div>
+                </div>
+                <div dropdown class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="snapshotDropdown"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ selectedSnapshot | titlecase }}
+                    </button>
+                    <div class="dropdown-menu scrollable-menu" aria-labelledby="snapShotDropdown">
+                        <div *ngFor="let snapshot of snapshots">
+                            <button class="dropdown-item" type="button" (click)="selectSnapshot(snapshot)">{{ snapshot | titlecase }}</button>
+                        </div>
+                    </div>
+                </div> 
+                <div dropdown class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="normalizationDropdown"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ selectedNormalization | titlecase }}
+                    </button>
+                    <div class="dropdown-menu scrollable-menu" aria-labelledby="normalizationDropdown">
+                        <div *ngFor="let normalization of normalizations; let i=index">
+                            <button class="dropdown-item" type="button" (click)="selectNormalization(normalization, i)">{{ normalization | titlecase }}</button>
+                        </div>
+                    </div>
+                </div>                    
+            </div>
+            <div class="card-body">
+                <div>
+                    <app-stacked-bar-chart [uuid]="uuid" [inputDataSet]="dataSet" [inputDataLabels]="dataLabels" [ylabel]="yAxisTitle"></app-stacked-bar-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
